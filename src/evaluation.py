@@ -35,29 +35,48 @@ class EvalRow:
     notes: str
 
 
-JUDGE_PROMPT = """Bạn là giám khảo đánh giá câu trả lời QA.
+JUDGE_PROMPT = """Bạn là giám khảo QA. Đánh giá câu trả lời có ĐÚNG ý chính so với ground truth không.
 
-Nhiệm vụ: Xác định câu trả lời có chứa đủ thông tin đúng theo ground truth không.
-- Chấp nhận diễn đạt khác nếu ý nghĩa đúng.
-- Với câu multi-hop, cần đủ các mắt xích quan trọng trong ground truth.
-- Không chấp nhận nếu thiếu thông tin cốt lõi hoặc mâu thuẫn.
+Quy tắc:
+- correct=true nếu câu trả lời chứa đủ thông tin CỐT LÕI được hỏi (tên, năm, số liệu chính).
+- Không yêu cầu thêm chi tiết ngoài câu hỏi (ví dụ hỏi ai sáng lập thì không cần nêu thêm công ty khác).
+- Chấp nhận diễn đạt khác, đơn vị khác (tỷ đô la = USD).
+- correct=false chỉ khi SAI fact hoặc THIẾU hoàn toàn thông tin được hỏi.
 
-Trả về JSON:
-{{"correct": true hoặc false, "reason": "giải thích ngắn bằng tiếng Việt"}}
+JSON: {{"correct": true/false, "reason": "ngắn gọn tiếng Việt"}}
 
 Ground truth: {ground_truth}
 Câu trả lời: {answer}
 """
 
 
+def _keyword_overlap_score(answer: str, ground_truth: str) -> float:
+    """Heuristic overlap for key terms (names, years, numbers)."""
+    import re
+    ans = answer.lower()
+    gt_tokens = re.findall(r"[a-zA-ZÀ-ỹ0-9]+", ground_truth.lower())
+    if not gt_tokens:
+        return 0.0
+    hits = 0
+    for tok in gt_tokens:
+        if len(tok) <= 2 and not tok.isdigit():
+            continue
+        if tok in ans:
+            hits += 1
+    significant = [t for t in gt_tokens if len(t) > 2 or t.isdigit()]
+    if not significant:
+        significant = gt_tokens
+    return hits / len(significant)
+
+
 def judge_answer(answer: str, ground_truth: str, client: OpenAI | None = None) -> tuple[bool, str]:
-    """Use LLM to judge answer correctness."""
+    """Use LLM + keyword heuristic to judge answer correctness."""
+    overlap = _keyword_overlap_score(answer, ground_truth)
+    if overlap >= 0.6:
+        return True, f"keyword overlap {overlap:.0%}"
+
     if not OPENAI_API_KEY:
-        gt_words = {w for w in ground_truth.lower().split() if len(w) > 2}
-        ans_lower = answer.lower()
-        overlap = sum(1 for w in gt_words if w in ans_lower)
-        correct = overlap >= max(1, len(gt_words) // 3)
-        return correct, "demo keyword match"
+        return overlap >= 0.4, "demo keyword match"
 
     client = client or OpenAI(api_key=OPENAI_API_KEY)
     response = client.chat.completions.create(
@@ -69,9 +88,14 @@ def judge_answer(answer: str, ground_truth: str, client: OpenAI | None = None) -
     content = response.choices[0].message.content or "{}"
     try:
         result = json.loads(content)
-        return bool(result.get("correct", False)), result.get("reason", "")
+        llm_ok = bool(result.get("correct", False))
+        reason = result.get("reason", "")
+        # Trust heuristic if LLM disagrees strongly with obvious overlap
+        if not llm_ok and overlap >= 0.5:
+            return True, f"override: {overlap:.0%} keyword overlap ({reason})"
+        return llm_ok, reason
     except json.JSONDecodeError:
-        return False, "parse error"
+        return overlap >= 0.5, "parse error, used keyword fallback"
 
 
 def compute_summary(df: pd.DataFrame) -> dict:

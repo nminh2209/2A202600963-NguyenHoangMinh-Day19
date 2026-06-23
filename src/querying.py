@@ -95,8 +95,11 @@ def answer_with_graph(
             {
                 "role": "system",
                 "content": (
-                    "Bạn trả lời câu hỏi dựa CHỈ trên ngữ cảnh đồ thị được cung cấp. "
-                    "Nếu không đủ thông tin, nói rõ. Trả lời ngắn gọn bằng tiếng Việt."
+                    "Bạn trả lời câu hỏi dựa trên ngữ cảnh đồ thị được cung cấp. "
+                    "Suy luận từ các quan hệ (subject, relation, object). "
+                    "Nếu đồ thị có một phần thông tin, trả lời phần biết được. "
+                    "Chỉ nói 'không đủ thông tin' khi đồ thị hoàn toàn không liên quan. "
+                    "Trả lời ngắn gọn bằng tiếng Việt."
                 ),
             },
             {

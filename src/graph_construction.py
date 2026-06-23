@@ -26,9 +26,20 @@ def get_neighbors_bfs(graph: nx.DiGraph, start_nodes: list[str], max_hops: int =
     """
     start_nodes = [normalize_entity(n) for n in start_nodes]
     matched_starts = []
-    for node in graph.nodes:
+    node_list = list(graph.nodes)
+    for node in node_list:
+        nl = node.lower()
         for start in start_nodes:
-            if start.lower() in node.lower() or node.lower() in start.lower():
+            sl = start.lower()
+            if sl in nl or nl in sl:
+                matched_starts.append(node)
+                break
+
+    # Fallback: match any corpus entity mentioned in question text joined as string
+    if not matched_starts and start_nodes:
+        query = " ".join(start_nodes).lower()
+        for node in node_list:
+            if node.lower() in query or any(part in node.lower() for part in query.split() if len(part) > 3):
                 matched_starts.append(node)
 
     if not matched_starts:

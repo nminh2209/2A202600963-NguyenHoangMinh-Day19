@@ -1,20 +1,31 @@
 {
   "indexing": {
-    "time_sec": 0,
+    "time_sec": 0.0,
     "tokens": 0
   },
   "construction": {
-    "time_sec": 0.0006418000002668123
+    "time_sec": 0.001
   },
   "evaluation": {
-    "time_sec": 10.615243100000043,
-    "flat_rag_total_tokens": 0,
-    "graph_rag_total_tokens": 0
+    "time_sec": 87.37,
+    "flat_rag_total_tokens": 5931,
+    "graph_rag_total_tokens": 9685,
+    "flat_accuracy_pct": 100.0,
+    "graph_accuracy_pct": 95.0,
+    "graph_wins_when_flat_wrong": 0,
+    "both_correct": 19,
+    "both_wrong": 0,
+    "multi_hop_flat_accuracy_pct": 100.0,
+    "multi_hop_graph_accuracy_pct": 100.0,
+    "avg_latency_flat_sec": 1.898,
+    "avg_latency_graph_sec": 2.13,
+    "total_tokens_flat": 5931,
+    "total_tokens_graph": 9685
   },
   "graph_stats": {
-    "num_nodes": 97,
-    "num_edges": 102,
-    "density": 0.011
+    "num_nodes": 154,
+    "num_edges": 176,
+    "density": 0.0075
   },
-  "mode": "demo"
+  "mode": "full"
 }
