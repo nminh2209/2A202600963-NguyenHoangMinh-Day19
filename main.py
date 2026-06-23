@@ -21,8 +21,8 @@ from src.config import (
     NEO4J_PASSWORD,
     NEO4J_URI,
     NEO4J_USER,
-    OPENAI_API_KEY,
     TRIPLES_PATH,
+    get_openai_api_key,
 )
 from src.pipeline import run_full_pipeline
 
@@ -57,7 +57,7 @@ def main():
         print(f"GraphRAG:  {answer_with_graph(args.question, graph).answer}")
         return
 
-    demo = args.demo or not OPENAI_API_KEY
+    demo = args.demo or not get_openai_api_key()
     print("=" * 60)
     print("LAB 19: GraphRAG - Tech Company Corpus")
     print("=" * 60)

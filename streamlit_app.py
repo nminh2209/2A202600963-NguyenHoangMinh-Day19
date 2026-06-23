@@ -20,8 +20,9 @@ from src.config import (
     COST_REPORT_PATH,
     EVAL_RESULTS_PATH,
     GRAPH_IMAGE_PATH,
-    OPENAI_API_KEY,
+    LLM_MODEL,
     TRIPLES_PATH,
+    get_openai_api_key,
 )
 from src.entity_extraction import load_triples
 from src.evaluation import compute_summary, run_evaluation
@@ -57,8 +58,26 @@ init_session()
 # Sidebar
 with st.sidebar:
     st.header("⚙️ Pipeline")
-    api_ok = bool(OPENAI_API_KEY)
-    st.success("API key loaded") if api_ok else st.warning("No API key — demo mode only")
+    api_key = get_openai_api_key()
+    api_ok = bool(api_key)
+    if api_ok:
+        st.success(f"Real LLM mode (`{LLM_MODEL}`)")
+        st.caption(f"Key: …{api_key[-8:]}")
+    else:
+        st.error("Demo mode — no API key in `.env`")
+
+    if st.button("🔌 Test API connection", use_container_width=True):
+        try:
+            from openai import OpenAI
+            r = OpenAI(api_key=api_key).chat.completions.create(
+                model=LLM_MODEL,
+                messages=[{"role": "user", "content": "Reply: OK"}],
+                max_tokens=5,
+            )
+            st.success(f"API works! Tokens used: {r.usage.total_tokens}")
+            st.caption("Check OpenAI Usage dashboard in 1-5 minutes.")
+        except Exception as e:
+            st.error(str(e))
 
     force_rebuild = st.checkbox("Force rebuild index", value=False)
     run_eval_on_build = st.checkbox("Run 20-question benchmark on build", value=True)

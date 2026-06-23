@@ -9,7 +9,7 @@ from dataclasses import dataclass
 import networkx as nx
 from openai import OpenAI
 
-from src.config import LLM_MODEL, OPENAI_API_KEY
+from src.config import LLM_MODEL, get_openai_api_key
 from src.graph_construction import get_neighbors_bfs, textualize_subgraph
 
 
@@ -33,7 +33,8 @@ class QueryResult:
 
 def extract_entities_from_question(question: str, client: OpenAI | None = None) -> tuple[list[str], int, int]:
     """Extract key entities from user question."""
-    if not OPENAI_API_KEY:
+    api_key = get_openai_api_key()
+    if not api_key:
         # Simple fallback: capitalize words that look like company/person names
         import re
         candidates = re.findall(r"\b[A-Z][a-zA-Z]+\b", question)
@@ -46,7 +47,7 @@ def extract_entities_from_question(question: str, client: OpenAI | None = None) 
         found = [k for k in known if k.lower() in question.lower()]
         return (found or candidates[:3]), 0, 0
 
-    client = client or OpenAI(api_key=OPENAI_API_KEY)
+    client = client or OpenAI(api_key=get_openai_api_key())
     response = client.chat.completions.create(
         model=LLM_MODEL,
         messages=[
@@ -78,7 +79,8 @@ def answer_with_graph(
     subgraph = get_neighbors_bfs(graph, entities, max_hops=max_hops)
     context = textualize_subgraph(subgraph)
 
-    if not OPENAI_API_KEY:
+    api_key = get_openai_api_key()
+    if not api_key:
         answer = f"[Demo] Dựa trên đồ thị: {context[:500]}"
         return QueryResult(
             question=question,
@@ -88,7 +90,7 @@ def answer_with_graph(
             latency_sec=time.perf_counter() - start,
         )
 
-    client = client or OpenAI(api_key=OPENAI_API_KEY)
+    client = client or OpenAI(api_key=get_openai_api_key())
     response = client.chat.completions.create(
         model=LLM_MODEL,
         messages=[

@@ -10,7 +10,7 @@ import chromadb
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from openai import OpenAI
 
-from src.config import CHROMA_DIR, EMBEDDING_MODEL, LLM_MODEL, OPENAI_API_KEY
+from src.config import CHROMA_DIR, EMBEDDING_MODEL, LLM_MODEL, get_openai_api_key
 
 
 @dataclass
@@ -48,9 +48,10 @@ class FlatRAG:
         self._collection = None
 
     def _get_embedding_function(self):
-        if not OPENAI_API_KEY:
+        api_key = get_openai_api_key()
+        if not api_key:
             return None
-        return OpenAIEmbeddingFunction(api_key=OPENAI_API_KEY, model_name=EMBEDDING_MODEL)
+        return OpenAIEmbeddingFunction(api_key=api_key, model_name=EMBEDDING_MODEL)
 
     def index(self, force_rebuild: bool = False) -> int:
         """Index corpus into ChromaDB. Returns number of chunks."""
@@ -72,7 +73,8 @@ class FlatRAG:
         text = self.corpus_path.read_text(encoding="utf-8")
         chunks = chunk_corpus(text)
 
-        if not OPENAI_API_KEY:
+        api_key = get_openai_api_key()
+        if not api_key:
             # Chroma default embedding when no API key
             self._collection = self.client.get_or_create_collection(name=self.collection_name)
 
@@ -91,7 +93,8 @@ class FlatRAG:
         start = time.perf_counter()
         context = self.retrieve(question, top_k=top_k)
 
-        if not OPENAI_API_KEY:
+        api_key = get_openai_api_key()
+        if not api_key:
             return FlatRAGResult(
                 question=question,
                 answer=f"[Demo] Dựa trên vector search: {context[:400]}",
@@ -99,7 +102,7 @@ class FlatRAG:
                 latency_sec=time.perf_counter() - start,
             )
 
-        client = OpenAI(api_key=OPENAI_API_KEY)
+        client = OpenAI(api_key=api_key)
         response = client.chat.completions.create(
             model=LLM_MODEL,
             messages=[

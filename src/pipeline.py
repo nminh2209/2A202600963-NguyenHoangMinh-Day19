@@ -13,8 +13,8 @@ from src.config import (
     COST_REPORT_PATH,
     EVAL_RESULTS_PATH,
     GRAPH_IMAGE_PATH,
-    OPENAI_API_KEY,
     TRIPLES_PATH,
+    get_openai_api_key,
 )
 from src.entity_extraction import extract_triples_from_corpus, load_triples, save_triples
 from src.evaluation import compute_summary, run_evaluation
@@ -45,7 +45,7 @@ def run_full_pipeline(
 ) -> PipelineState:
     """Build graph, index Flat RAG, optionally run evaluation."""
     state = PipelineState()
-    state.mode = "demo" if (demo or not OPENAI_API_KEY) else "full"
+    state.mode = "demo" if (demo or not get_openai_api_key()) else "full"
 
     def _progress(msg: str, pct: float):
         if progress_callback:

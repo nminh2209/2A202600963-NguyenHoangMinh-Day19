@@ -10,7 +10,7 @@ import networkx as nx
 import pandas as pd
 from openai import OpenAI
 
-from src.config import BENCHMARK_PATH, EVAL_RESULTS_PATH, LLM_MODEL, OPENAI_API_KEY
+from src.config import BENCHMARK_PATH, EVAL_RESULTS_PATH, LLM_MODEL, get_openai_api_key
 from src.flat_rag import FlatRAG
 from src.querying import answer_with_graph
 
@@ -75,10 +75,10 @@ def judge_answer(answer: str, ground_truth: str, client: OpenAI | None = None) -
     if overlap >= 0.6:
         return True, f"keyword overlap {overlap:.0%}"
 
-    if not OPENAI_API_KEY:
+    if not get_openai_api_key():
         return overlap >= 0.4, "demo keyword match"
 
-    client = client or OpenAI(api_key=OPENAI_API_KEY)
+    client = client or OpenAI(api_key=get_openai_api_key())
     response = client.chat.completions.create(
         model=LLM_MODEL,
         messages=[{"role": "user", "content": JUDGE_PROMPT.format(ground_truth=ground_truth, answer=answer)}],
@@ -134,7 +134,7 @@ def run_evaluation(
 ) -> pd.DataFrame:
     """Run full benchmark and save results CSV."""
     questions = json.loads(benchmark_path.read_text(encoding="utf-8"))
-    client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
+    client = OpenAI(api_key=get_openai_api_key()) if get_openai_api_key() else None
     rows: list[EvalRow] = []
     total = len(questions)
 

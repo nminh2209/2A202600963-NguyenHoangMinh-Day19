@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 
 from openai import OpenAI
 
-from src.config import LLM_MODEL, OPENAI_API_KEY
+from src.config import LLM_MODEL, get_openai_api_key
 from src.demo_triples import DEMO_TRIPLES
 
 EXTRACTION_PROMPT = """Bạn là hệ thống trích xuất tri thức. Đọc văn bản và trích xuất các bộ ba (subject, relation, object).
@@ -57,7 +57,7 @@ def deduplicate_triples(triples: list[tuple[str, str, str]]) -> list[tuple[str, 
 
 def extract_triples_from_text(text: str, client: OpenAI | None = None) -> ExtractionResult:
     """Extract triples from a single text chunk using OpenAI."""
-    client = client or OpenAI(api_key=OPENAI_API_KEY)
+    client = client or OpenAI(api_key=get_openai_api_key())
     response = client.chat.completions.create(
         model=LLM_MODEL,
         messages=[
@@ -94,7 +94,7 @@ def extract_triples_from_text(text: str, client: OpenAI | None = None) -> Extrac
 
 def extract_triples_from_corpus(corpus_path, demo: bool = False) -> ExtractionResult:
     """Extract triples from full corpus file."""
-    if demo or not OPENAI_API_KEY:
+    if demo or not get_openai_api_key():
         return ExtractionResult(triples=deduplicate_triples(DEMO_TRIPLES), source="demo")
 
     text = corpus_path.read_text(encoding="utf-8")
@@ -103,7 +103,7 @@ def extract_triples_from_corpus(corpus_path, demo: bool = False) -> ExtractionRe
     all_triples: list[tuple[str, str, str]] = []
     total_prompt = total_completion = 0
 
-    client = OpenAI(api_key=OPENAI_API_KEY)
+    client = OpenAI(api_key=get_openai_api_key())
     for para in paragraphs:
         result = extract_triples_from_text(para, client)
         all_triples.extend(result.triples)
