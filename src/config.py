@@ -9,9 +9,10 @@ load_dotenv()
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
+DATASET_DIR = PROJECT_ROOT / "dataset" / "dataset"
 OUTPUT_DIR = PROJECT_ROOT / "output"
 
-CORPUS_PATH = DATA_DIR / "tech_company_corpus.txt"
+CORPUS_PATH = OUTPUT_DIR / "merged_corpus.txt"
 BENCHMARK_PATH = DATA_DIR / "benchmark_questions.json"
 TRIPLES_PATH = OUTPUT_DIR / "triples.json"
 GRAPH_IMAGE_PATH = OUTPUT_DIR / "knowledge_graph.png"

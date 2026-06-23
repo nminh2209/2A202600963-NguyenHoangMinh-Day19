@@ -39,10 +39,9 @@ def extract_entities_from_question(question: str, client: OpenAI | None = None) 
         import re
         candidates = re.findall(r"\b[A-Z][a-zA-Z]+\b", question)
         known = [
-            "OpenAI", "Google", "Microsoft", "Apple", "Meta", "Amazon", "Tesla",
-            "DeepMind", "GitHub", "Instagram", "WhatsApp", "NVIDIA", "Twitter",
-            "Slack", "Oracle", "IBM", "Netflix", "Adobe", "Salesforce", "Elon Musk",
-            "Sam Altman", "ChatGPT", "AlphaGo",
+            "Tesla", "General Motors", "GM", "Ford", "Stellantis", "BloombergNEF", "BNEF",
+            "ICCT", "China", "Biden", "J.D. Power", "UAW", "EV", "ZEV", "Colin McKerracher",
+            "Elizabeth Krear", "Motor Intelligence", "Bloomberg",
         ]
         found = [k for k in known if k.lower() in question.lower()]
         return (found or candidates[:3]), 0, 0
@@ -69,14 +68,16 @@ def extract_entities_from_question(question: str, client: OpenAI | None = None) 
 def answer_with_graph(
     question: str,
     graph: nx.DiGraph,
-    max_hops: int = 2,
+    max_hops: int = 3,
     client: OpenAI | None = None,
 ) -> QueryResult:
     """GraphRAG: extract entities -> BFS 2-hop -> textualize -> LLM answer."""
     start = time.perf_counter()
     entities, ent_prompt, ent_completion = extract_entities_from_question(question, client)
 
-    subgraph = get_neighbors_bfs(graph, entities, max_hops=max_hops)
+    subgraph = get_neighbors_bfs(
+        graph, entities, max_hops=2, question=question, entities=entities
+    )
     context = textualize_subgraph(subgraph)
 
     api_key = get_openai_api_key()
@@ -97,11 +98,10 @@ def answer_with_graph(
             {
                 "role": "system",
                 "content": (
-                    "Bạn trả lời câu hỏi dựa trên ngữ cảnh đồ thị được cung cấp. "
-                    "Suy luận từ các quan hệ (subject, relation, object). "
-                    "Nếu đồ thị có một phần thông tin, trả lời phần biết được. "
-                    "Chỉ nói 'không đủ thông tin' khi đồ thị hoàn toàn không liên quan. "
-                    "Trả lời ngắn gọn bằng tiếng Việt."
+                    "Answer the question using the knowledge graph context provided. "
+                    "Reason over the (subject, relation, object) triples. "
+                    "Answer with available facts; only say insufficient information if the graph is unrelated. "
+                    "Be concise. Answer in English."
                 ),
             },
             {

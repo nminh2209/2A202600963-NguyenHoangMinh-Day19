@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 import networkx as nx
 
 from src.entity_extraction import normalize_entity
@@ -19,34 +21,81 @@ def build_networkx_graph(triples: list[tuple[str, str, str]]) -> nx.DiGraph:
     return graph
 
 
-def get_neighbors_bfs(graph: nx.DiGraph, start_nodes: list[str], max_hops: int = 2) -> dict:
-    """
-    BFS traversal from start nodes within max_hops.
-    Returns nodes, edges, and triples discovered.
-    """
-    start_nodes = [normalize_entity(n) for n in start_nodes]
-    matched_starts = []
+def find_seed_nodes(graph: nx.DiGraph, question: str, entities: list[str]) -> list[str]:
+    """Match question entities/keywords to graph nodes."""
+    matched: list[str] = []
     node_list = list(graph.nodes)
-    for node in node_list:
-        nl = node.lower()
-        for start in start_nodes:
-            sl = start.lower()
-            if sl in nl or nl in sl:
-                matched_starts.append(node)
-                break
 
-    # Fallback: match any corpus entity mentioned in question text joined as string
-    if not matched_starts and start_nodes:
-        query = " ".join(start_nodes).lower()
+    for entity in entities:
+        el = normalize_entity(entity).lower()
         for node in node_list:
-            if node.lower() in query or any(part in node.lower() for part in query.split() if len(part) > 3):
-                matched_starts.append(node)
+            nl = node.lower()
+            if el in nl or nl in el:
+                matched.append(node)
+
+    if not matched:
+        keywords = re.findall(r"\b[A-Za-z][A-Za-z0-9&.'-]{2,}\b", question)
+        stop = {
+            "what", "which", "when", "where", "does", "the", "and", "for", "with",
+            "from", "that", "this", "have", "were", "was", "are", "how", "many",
+            "much", "year", "according", "will", "over", "into", "about",
+        }
+        for word in keywords:
+            wl = word.lower()
+            if wl in stop or len(wl) < 4:
+                continue
+            for node in node_list:
+                if wl in node.lower():
+                    matched.append(node)
+
+    seen: set[str] = set()
+    unique: list[str] = []
+    for n in matched:
+        if n not in seen:
+            seen.add(n)
+            unique.append(n)
+    return unique[:8]
+
+
+def rank_and_limit_triples(triples: list[tuple[str, str, str]], question: str, limit: int = 35) -> list[tuple[str, str, str]]:
+    """Keep the most question-relevant triples to avoid context overload."""
+    if len(triples) <= limit:
+        return triples
+    qwords = {w.lower() for w in re.findall(r"\b[A-Za-z0-9%$.,]+\b", question) if len(w) > 2}
+    scored = []
+    for s, r, o in triples:
+        text = f"{s} {r} {o}".lower()
+        score = sum(1 for w in qwords if w in text)
+        scored.append((score, s, r, o))
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [(s, r, o) for _, s, r, o in scored[:limit]]
+
+
+def get_neighbors_bfs(
+    graph: nx.DiGraph,
+    start_nodes: list[str],
+    max_hops: int = 2,
+    question: str = "",
+    entities: list[str] | None = None,
+) -> dict:
+    """BFS traversal from seed nodes within max_hops."""
+    if entities is not None and question:
+        matched_starts = find_seed_nodes(graph, question, entities)
+    else:
+        matched_starts = []
+        node_list = list(graph.nodes)
+        for node in node_list:
+            for start in [normalize_entity(n) for n in start_nodes]:
+                sl = start.lower()
+                if sl in node.lower() or node.lower() in sl:
+                    matched_starts.append(node)
+                    break
 
     if not matched_starts:
         return {"nodes": [], "edges": [], "triples": []}
 
-    visited = set()
-    edges_found = []
+    visited: set[str] = set()
+    edges_found: list[tuple[str, str, str]] = []
     queue = [(n, 0) for n in matched_starts]
 
     while queue:
@@ -68,18 +117,17 @@ def get_neighbors_bfs(graph: nx.DiGraph, start_nodes: list[str], max_hops: int =
                 queue.append((predecessor, depth + 1))
 
     triples = list(dict.fromkeys(edges_found))
-    nodes = list(visited)
-    return {"nodes": nodes, "edges": triples, "triples": triples}
+    if question:
+        triples = rank_and_limit_triples(triples, question)
+    return {"nodes": list(visited), "edges": triples, "triples": triples}
 
 
 def textualize_subgraph(subgraph: dict) -> str:
     """Convert graph neighborhood to natural language context."""
-    lines = []
-    for s, r, o in subgraph.get("triples", []):
-        lines.append(f"({s}, {r}, {o})")
+    lines = [f"({s}, {r}, {o})" for s, r, o in subgraph.get("triples", [])]
     if not lines:
-        return "Không tìm thấy thông tin liên quan trong đồ thị."
-    return "Các quan hệ trong đồ thị tri thức:\n" + "\n".join(lines)
+        return "No related information found in the knowledge graph."
+    return "Knowledge graph relations:\n" + "\n".join(lines)
 
 
 def push_to_neo4j(triples: list[tuple[str, str, str]], uri: str, user: str, password: str) -> int:

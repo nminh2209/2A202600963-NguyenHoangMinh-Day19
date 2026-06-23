@@ -25,7 +25,7 @@ def visualize_graph(graph: nx.DiGraph, output_path, max_labels: int = 40) -> Non
     nx.draw_networkx_edges(subgraph, pos, edge_color="#888888", arrows=True, arrowsize=12, alpha=0.6)
     nx.draw_networkx_edge_labels(subgraph, pos, edge_labels=edge_labels, font_size=5)
 
-    plt.title("Tech Company Knowledge Graph (NetworkX)", fontsize=14, fontweight="bold")
+    plt.title("US EV Knowledge Graph (NetworkX)", fontsize=14, fontweight="bold")
     plt.axis("off")
     plt.tight_layout()
     plt.savefig(output_path, dpi=150, bbox_inches="tight")

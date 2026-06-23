@@ -16,6 +16,7 @@ import time
 from src.config import (
     CORPUS_PATH,
     COST_REPORT_PATH,
+    DATASET_DIR,
     EVAL_RESULTS_PATH,
     GRAPH_IMAGE_PATH,
     NEO4J_PASSWORD,
@@ -50,7 +51,7 @@ def main():
             print("No triples found. Run pipeline first: python main.py")
             return
         graph = build_networkx_graph(triples)
-        flat_rag = FlatRAG(CORPUS_PATH)
+        flat_rag = FlatRAG(dataset_dir=DATASET_DIR)
         flat_rag.index()
         print(f"\n[Query] {args.question}")
         print(f"\nFlat RAG:  {flat_rag.answer(args.question).answer}")
@@ -59,7 +60,7 @@ def main():
 
     demo = args.demo or not get_openai_api_key()
     print("=" * 60)
-    print("LAB 19: GraphRAG - Tech Company Corpus")
+    print("LAB 19: GraphRAG - US EV Dataset (70 documents)")
     print("=" * 60)
     print(f"[Mode] {'DEMO' if demo else 'FULL'}")
 

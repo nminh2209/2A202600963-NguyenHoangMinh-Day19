@@ -1,31 +1,37 @@
 {
+  "dataset": {
+    "documents": 70,
+    "source": "dataset/dataset",
+    "topic": "US electric vehicle sector"
+  },
   "indexing": {
-    "time_sec": 0.0,
-    "tokens": 0
+    "time_sec": 487.56,
+    "tokens": 81671
   },
   "construction": {
-    "time_sec": 0.0008
+    "time_sec": 0.0059
   },
   "evaluation": {
-    "time_sec": 89.51,
-    "flat_rag_total_tokens": 5931,
-    "graph_rag_total_tokens": 9650,
-    "flat_accuracy_pct": 100.0,
-    "graph_accuracy_pct": 90.0,
+    "time_sec": 125.55,
+    "flat_rag_total_tokens": 23992,
+    "graph_rag_total_tokens": 11078,
+    "flat_accuracy_pct": 75.0,
+    "graph_accuracy_pct": 25.0,
     "graph_wins_when_flat_wrong": 0,
-    "both_correct": 18,
-    "both_wrong": 0,
-    "multi_hop_flat_accuracy_pct": 100.0,
-    "multi_hop_graph_accuracy_pct": 93.3,
-    "avg_latency_flat_sec": 2.066,
-    "avg_latency_graph_sec": 1.996,
-    "total_tokens_flat": 5931,
-    "total_tokens_graph": 9650
+    "both_correct": 5,
+    "both_wrong": 5,
+    "multi_hop_flat_accuracy_pct": 75.0,
+    "multi_hop_graph_accuracy_pct": 25.0,
+    "avg_latency_flat_sec": 2.598,
+    "avg_latency_graph_sec": 2.044,
+    "total_tokens_flat": 23992,
+    "total_tokens_graph": 11078
   },
   "graph_stats": {
-    "num_nodes": 154,
-    "num_edges": 176,
-    "density": 0.0075
+    "num_nodes": 861,
+    "num_edges": 656,
+    "density": 0.0009,
+    "triples": 670
   },
   "mode": "full"
 }

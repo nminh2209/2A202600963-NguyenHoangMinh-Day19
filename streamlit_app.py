@@ -18,12 +18,14 @@ from src.config import (
     BENCHMARK_PATH,
     CORPUS_PATH,
     COST_REPORT_PATH,
+    DATASET_DIR,
     EVAL_RESULTS_PATH,
     GRAPH_IMAGE_PATH,
     LLM_MODEL,
     TRIPLES_PATH,
     get_openai_api_key,
 )
+from src.corpus import load_dataset
 from src.entity_extraction import load_triples
 from src.evaluation import compute_summary, run_evaluation
 from src.flat_rag import FlatRAG
@@ -33,8 +35,8 @@ from src.querying import answer_with_graph
 
 st.set_page_config(page_title="GraphRAG Lab 19", page_icon="🔗", layout="wide")
 
-st.title("🔗 Lab 19: GraphRAG — Tech Company Corpus")
-st.caption("Flat RAG (ChromaDB) vs GraphRAG (NetworkX + BFS multi-hop)")
+st.title("🔗 Lab 19: GraphRAG — US Electric Vehicle Dataset")
+st.caption("70 documents | Flat RAG (ChromaDB) vs GraphRAG (NetworkX + BFS)")
 
 
 def init_session():
@@ -48,7 +50,7 @@ def load_cached_pipeline():
         return None
     triples = load_triples(TRIPLES_PATH)
     graph = build_networkx_graph(triples)
-    flat_rag = FlatRAG(CORPUS_PATH)
+    flat_rag = FlatRAG(dataset_dir=DATASET_DIR)
     flat_rag.index(force_rebuild=False)
     return {"triples": triples, "graph": graph, "flat_rag": flat_rag, "stats": graph_stats(graph)}
 
@@ -140,7 +142,7 @@ with tab_query:
     st.subheader("Compare Flat RAG vs GraphRAG")
     question = st.text_input(
         "Your question",
-        value="Ai là CEO của công ty đã mua DeepMind?",
+        value="Which company leads the US EV market with more than half of all EV sales?",
         placeholder="Nhập câu hỏi về tech companies...",
     )
     max_hops = st.slider("BFS max hops", 1, 3, 2)
@@ -176,7 +178,7 @@ with tab_graph:
         st.image(str(GRAPH_IMAGE_PATH), caption="Knowledge Graph (NetworkX + Matplotlib)")
 
     st.subheader("Explore subgraph (BFS)")
-    entity = st.text_input("Start entity", value="DeepMind")
+    entity = st.text_input("Start entity", value="Tesla")
     if entity:
         sub = get_neighbors_bfs(graph, [entity], max_hops=2)
         st.code(textualize_subgraph(sub), language=None)
@@ -249,8 +251,10 @@ with tab_eval:
 
 # --- Corpus tab ---
 with tab_corpus:
-    st.subheader("Tech Company Corpus")
-    st.text_area("Corpus text", CORPUS_PATH.read_text(encoding="utf-8"), height=400)
+    st.subheader("US EV Dataset (70 documents)")
+    st.metric("Documents", len(load_dataset(DATASET_DIR)))
+    if CORPUS_PATH.exists():
+        st.text_area("Merged corpus preview", CORPUS_PATH.read_text(encoding="utf-8")[:8000], height=400)
     if BENCHMARK_PATH.exists():
         st.subheader("Benchmark questions")
         st.dataframe(pd.read_json(BENCHMARK_PATH), use_container_width=True)

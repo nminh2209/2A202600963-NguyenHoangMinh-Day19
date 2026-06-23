@@ -8,21 +8,21 @@ from dataclasses import dataclass, field
 
 from openai import OpenAI
 
-from src.config import LLM_MODEL, get_openai_api_key
+from src.config import DATASET_DIR, LLM_MODEL, get_openai_api_key
+from src.corpus import extraction_chunks, load_dataset, prepare_corpus
 from src.demo_triples import DEMO_TRIPLES
 
-EXTRACTION_PROMPT = """Bạn là hệ thống trích xuất tri thức. Đọc văn bản và trích xuất các bộ ba (subject, relation, object).
+EXTRACTION_PROMPT = """You are a knowledge extraction system. Read the text about the US electric vehicle sector and extract triples (subject, relation, object).
 
-Quy tắc:
-- subject và object là THỰC THỂ (người, công ty, sản phẩm, địa điểm, năm).
-- relation là QUAN HỆ viết HOA bằng tiếng Anh (FOUNDED_BY, CEO_OF, ACQUIRED, FOUNDED_IN, ...).
-- Mỗi câu có thể sinh nhiều triple.
-- Không trích xuất thuộc tính mô tả chung làm node riêng nếu có thể gắn vào quan hệ.
+Rules:
+- subject and object are ENTITIES (companies, people, organizations, metrics, years, locations).
+- relation is an UPPERCASE English relation (MARKET_SHARE, PUBLISHED_BY, LOCATED_IN, GROWTH_RATE, ...).
+- Extract numeric facts as objects when relevant (e.g. Tesla, MARKET_SHARE, 50%).
 
-Trả về JSON object với key "triples":
-{{"triples": [{{"subject": "OpenAI", "relation": "FOUNDED_BY", "object": "Sam Altman"}}, ...]}}
+Return JSON:
+{{"triples": [{{"subject": "Tesla", "relation": "MARKET_LEADER", "object": "US EV market"}}, ...]}}
 
-Văn bản:
+Text:
 {text}
 """
 
@@ -36,9 +36,9 @@ class ExtractionResult:
     source: str = "llm"
 
 
-def normalize_entity(name: str) -> str:
+def normalize_entity(name: str | int | float) -> str:
     """Normalize entity names for deduplication."""
-    name = name.strip()
+    name = str(name).strip()
     name = re.sub(r"\s+", " ", name)
     return name
 
@@ -75,7 +75,7 @@ def extract_triples_from_text(text: str, client: OpenAI | None = None) -> Extrac
         if isinstance(parsed, dict):
             parsed = parsed.get("triples", parsed.get("data", []))
         triples = [
-            (normalize_entity(t["subject"]), t["relation"].strip().upper(), normalize_entity(t["object"]))
+            (normalize_entity(t["subject"]), str(t["relation"]).strip().upper(), normalize_entity(t["object"]))
             for t in parsed
             if "subject" in t and "relation" in t and "object" in t
         ]
@@ -92,20 +92,24 @@ def extract_triples_from_text(text: str, client: OpenAI | None = None) -> Extrac
     )
 
 
-def extract_triples_from_corpus(corpus_path, demo: bool = False) -> ExtractionResult:
-    """Extract triples from full corpus file."""
+def extract_triples_from_corpus(corpus_path=None, demo: bool = False, progress_callback=None) -> ExtractionResult:
+    """Extract triples from dataset folder (70 txt files) or merged corpus."""
     if demo or not get_openai_api_key():
         return ExtractionResult(triples=deduplicate_triples(DEMO_TRIPLES), source="demo")
 
-    text = corpus_path.read_text(encoding="utf-8")
-    paragraphs = [p.strip() for p in text.split("\n") if p.strip()]
+    from src.config import CORPUS_PATH
+
+    docs = prepare_corpus(DATASET_DIR, CORPUS_PATH)
+    chunks = extraction_chunks(docs)
 
     all_triples: list[tuple[str, str, str]] = []
     total_prompt = total_completion = 0
-
     client = OpenAI(api_key=get_openai_api_key())
-    for para in paragraphs:
-        result = extract_triples_from_text(para, client)
+
+    for i, chunk in enumerate(chunks):
+        if progress_callback:
+            progress_callback(f"Extracting doc {i + 1}/{len(chunks)}...", (i + 1) / len(chunks))
+        result = extract_triples_from_text(chunk, client)
         all_triples.extend(result.triples)
         total_prompt += result.prompt_tokens
         total_completion += result.completion_tokens

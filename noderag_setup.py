@@ -24,16 +24,21 @@ NodeRAG is an all-in-one GraphRAG framework. Setup steps:
 from pathlib import Path
 import shutil
 
-from src.config import CORPUS_PATH, PROJECT_ROOT
+from src.config import DATASET_DIR, PROJECT_ROOT
+from src.corpus import load_dataset
 
 
 def setup_noderag_project(target_dir: Path | None = None) -> Path:
-    """Copy corpus into NodeRAG project input folder."""
+    """Copy dataset documents into NodeRAG project input folder."""
     target = target_dir or PROJECT_ROOT / "noderag_project"
     input_dir = target / "input"
     input_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy(CORPUS_PATH, input_dir / "tech_company_corpus.txt")
-    print(f"NodeRAG input ready at: {input_dir}")
+    docs = load_dataset(DATASET_DIR)
+    for doc in docs:
+        src = DATASET_DIR / f"{doc.doc_id}.txt"
+        if src.exists():
+            shutil.copy(src, input_dir / src.name)
+    print(f"NodeRAG input ready: {len(docs)} files at {input_dir}")
     print("Next: pip install NodeRAG && python -m NodeRAG.build -f", target)
     return target
 

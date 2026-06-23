@@ -5,12 +5,14 @@ from __future__ import annotations
 import time
 import uuid
 from dataclasses import dataclass
+from pathlib import Path
 
 import chromadb
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from openai import OpenAI
 
-from src.config import CHROMA_DIR, EMBEDDING_MODEL, LLM_MODEL, get_openai_api_key
+from src.config import CHROMA_DIR, DATASET_DIR, EMBEDDING_MODEL, LLM_MODEL, get_openai_api_key
+from src.corpus import load_dataset, rag_chunks
 
 
 @dataclass
@@ -23,8 +25,8 @@ class FlatRAGResult:
     latency_sec: float = 0.0
 
 
-def chunk_corpus(text: str, chunk_size: int = 300) -> list[str]:
-    """Split corpus into sentence-based chunks."""
+def chunk_corpus(text: str, chunk_size: int = 900) -> list[str]:
+    """Split plain text into sentence-based chunks."""
     sentences = [s.strip() for s in text.replace("\n", " ").split(".") if s.strip()]
     chunks = []
     current = ""
@@ -41,11 +43,20 @@ def chunk_corpus(text: str, chunk_size: int = 300) -> list[str]:
 
 
 class FlatRAG:
-    def __init__(self, corpus_path, collection_name: str = "tech_corpus"):
-        self.corpus_path = corpus_path
+    def __init__(self, corpus_path=None, dataset_dir: Path | None = None, collection_name: str = "ev_corpus"):
+        self.corpus_path = Path(corpus_path) if corpus_path else None
+        self.dataset_dir = Path(dataset_dir) if dataset_dir else DATASET_DIR
         self.collection_name = collection_name
         self.client = chromadb.PersistentClient(path=str(CHROMA_DIR))
         self._collection = None
+
+    def _get_chunks(self) -> list[str]:
+        if self.dataset_dir.exists() and list(self.dataset_dir.glob("doc_*.txt")):
+            docs = load_dataset(self.dataset_dir)
+            return rag_chunks(docs)
+        if self.corpus_path and self.corpus_path.exists():
+            return chunk_corpus(self.corpus_path.read_text(encoding="utf-8"))
+        return []
 
     def _get_embedding_function(self):
         api_key = get_openai_api_key()
@@ -70,26 +81,30 @@ class FlatRAG:
         if self._collection.count() > 0 and not force_rebuild:
             return self._collection.count()
 
-        text = self.corpus_path.read_text(encoding="utf-8")
-        chunks = chunk_corpus(text)
+        chunks = self._get_chunks()
+        if not chunks:
+            return 0
 
         api_key = get_openai_api_key()
         if not api_key:
-            # Chroma default embedding when no API key
             self._collection = self.client.get_or_create_collection(name=self.collection_name)
 
-        ids = [str(uuid.uuid4()) for _ in chunks]
-        self._collection.add(documents=chunks, ids=ids)
+        # Batch add for large corpora
+        batch_size = 100
+        for i in range(0, len(chunks), batch_size):
+            batch = chunks[i : i + batch_size]
+            ids = [str(uuid.uuid4()) for _ in batch]
+            self._collection.add(documents=batch, ids=ids)
         return len(chunks)
 
-    def retrieve(self, question: str, top_k: int = 3) -> str:
+    def retrieve(self, question: str, top_k: int = 5) -> str:
         if self._collection is None:
             self.index()
         results = self._collection.query(query_texts=[question], n_results=top_k)
         docs = results.get("documents", [[]])[0]
         return "\n\n".join(docs) if docs else ""
 
-    def answer(self, question: str, top_k: int = 3) -> FlatRAGResult:
+    def answer(self, question: str, top_k: int = 5) -> FlatRAGResult:
         start = time.perf_counter()
         context = self.retrieve(question, top_k=top_k)
 
@@ -97,7 +112,7 @@ class FlatRAG:
         if not api_key:
             return FlatRAGResult(
                 question=question,
-                answer=f"[Demo] Dựa trên vector search: {context[:400]}",
+                answer=f"[Demo] Based on vector search: {context[:400]}",
                 context=context,
                 latency_sec=time.perf_counter() - start,
             )
@@ -109,11 +124,11 @@ class FlatRAG:
                 {
                     "role": "system",
                     "content": (
-                        "Trả lời câu hỏi dựa trên ngữ cảnh được cung cấp. "
-                        "Trả lời ngắn gọn bằng tiếng Việt."
+                        "Answer the question using only the provided context about the US electric vehicle sector. "
+                        "Be concise and factual. Answer in English."
                     ),
                 },
-                {"role": "user", "content": f"Ngữ cảnh:\n{context}\n\nCâu hỏi: {question}"},
+                {"role": "user", "content": f"Context:\n{context}\n\nQuestion: {question}"},
             ],
             temperature=0,
         )
