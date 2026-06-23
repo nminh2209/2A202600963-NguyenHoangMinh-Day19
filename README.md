@@ -4,6 +4,8 @@
 
 ```
 ├── main.py                      # Pipeline chính
+├── streamlit_app.py             # Demo UI (Streamlit)
+├── verify_api.py                # Kiểm tra kết nối OpenAI API
 ├── graphrag_lab19.ipynb         # Notebook báo cáo
 ├── noderag_setup.py             # Tích hợp NodeRAG (tùy chọn)
 ├── requirements.txt
@@ -42,6 +44,9 @@ python main.py
 
 # Streamlit demo UI
 streamlit run streamlit_app.py
+
+# Kiểm tra API key
+python verify_api.py
 
 # Hỏi 1 câu
 python main.py --question "Ai là CEO của công ty sở hữu DeepMind?"
@@ -96,9 +101,59 @@ Ví dụ: `"OpenAI được thành lập năm 2015"` → `(OpenAI, FOUNDED_IN, 2
 
 ---
 
+## Kết quả đánh giá (Full LLM — OpenAI `gpt-4o-mini`)
+
+Chạy qua **Streamlit** (`streamlit run streamlit_app.py`) với API key thật trên corpus Tech Company.
+
+### Tổng quan đồ thị
+
+| Metric | Giá trị |
+|--------|---------|
+| Triples trích xuất | 180 |
+| Nodes | 154 |
+| Edges | 176 |
+| Density | 0.0075 |
+
+### So sánh Flat RAG vs GraphRAG (20 câu hỏi benchmark)
+
+| Metric | Flat RAG (ChromaDB) | GraphRAG (NetworkX + BFS) |
+|--------|---------------------|---------------------------|
+| **Overall accuracy** | **100.0%** | **90.0%** |
+| **Multi-hop accuracy** | **100.0%** | **93.3%** |
+| **Graph wins (Flat sai → Graph đúng)** | — | **0** |
+| **Avg latency** | 2.07s | 2.00s |
+| **Total tokens (eval)** | 5,931 | 9,650 |
+
+### Phân tích chi phí (`output/cost_analysis.json`)
+
+| Giai đoạn | Thời gian | Tokens |
+|-----------|-----------|--------|
+| Indexing (LLM extraction) | ~110s | ~15,188 |
+| Graph construction | <0.01s | — |
+| Evaluation (20 câu) | ~89.5s | ~15,581 |
+| **Tổng ước tính** | — | **~30,000+** |
+
+> Chi phí OpenAI rất nhỏ (~$0.01–0.02). Usage có thể trễ 5–15 phút trên dashboard.
+
+### Câu GraphRAG trả lời sai (2/20)
+
+| ID | Câu hỏi | Lý do |
+|----|---------|-------|
+| Q5 | Công ty nào đã đầu tư hơn 10 tỷ USD vào OpenAI? | Đồ thị có `(Microsoft, INVESTED_IN, OpenAI)` nhưng **không có số tiền** → GraphRAG trả "Không đủ thông tin" |
+| Q17 | Elon Musk mua Twitter với giá bao nhiêu và đổi tên thành gì? | Đồ thị thiếu triple giá **44 tỷ USD** → GraphRAG không trả lời được |
+
+### Kết luận ngắn
+
+- **Flat RAG** tốt hơn khi câu trả lời nằm trực tiếp trong văn bản gốc (retrieval theo chunk).
+- **GraphRAG** mạnh ở multi-hop có quan hệ rõ (DeepMind → Google → CEO) nhưng **phụ thuộc chất lượng triple extraction**.
+- Trong lần chạy này **không có trường hợp GraphRAG sửa lỗi ảo giác của Flat RAG** — Flat RAG đạt 100% nhờ corpus nhỏ và chunk chứa đủ thông tin.
+
+---
+
 ## Deliverables
 
-1. **Mã nguồn**: `main.py`, `src/`, `graphrag_lab19.ipynb`
+1. **Mã nguồn**: `main.py`, `streamlit_app.py`, `src/`, `graphrag_lab19.ipynb`
 2. **Ảnh đồ thị**: `output/knowledge_graph.png`
 3. **Bảng 20 câu hỏi**: `output/evaluation_results.csv`
 4. **Phân tích chi phí**: `output/cost_analysis.json`
+5. **Demo UI**: `streamlit run streamlit_app.py`

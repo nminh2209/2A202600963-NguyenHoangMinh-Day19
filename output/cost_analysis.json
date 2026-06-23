@@ -4,23 +4,23 @@
     "tokens": 0
   },
   "construction": {
-    "time_sec": 0.001
+    "time_sec": 0.0008
   },
   "evaluation": {
-    "time_sec": 87.37,
+    "time_sec": 89.51,
     "flat_rag_total_tokens": 5931,
-    "graph_rag_total_tokens": 9685,
+    "graph_rag_total_tokens": 9650,
     "flat_accuracy_pct": 100.0,
-    "graph_accuracy_pct": 95.0,
+    "graph_accuracy_pct": 90.0,
     "graph_wins_when_flat_wrong": 0,
-    "both_correct": 19,
+    "both_correct": 18,
     "both_wrong": 0,
     "multi_hop_flat_accuracy_pct": 100.0,
-    "multi_hop_graph_accuracy_pct": 100.0,
-    "avg_latency_flat_sec": 1.898,
-    "avg_latency_graph_sec": 2.13,
+    "multi_hop_graph_accuracy_pct": 93.3,
+    "avg_latency_flat_sec": 2.066,
+    "avg_latency_graph_sec": 1.996,
     "total_tokens_flat": 5931,
-    "total_tokens_graph": 9685
+    "total_tokens_graph": 9650
   },
   "graph_stats": {
     "num_nodes": 154,
