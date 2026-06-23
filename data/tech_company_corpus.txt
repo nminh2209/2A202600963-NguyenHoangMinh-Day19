@@ -1,0 +1,55 @@
+OpenAI được thành lập bởi Sam Altman và Elon Musk vào năm 2015. OpenAI có trụ sở tại San Francisco, California.
+Sam Altman là CEO của OpenAI. OpenAI đã phát triển ChatGPT và mô hình GPT-4.
+Elon Musk rời khỏi hội đồng quản trị OpenAI vào năm 2018. Elon Musk cũng là CEO của Tesla và SpaceX.
+Tesla được thành lập bởi Elon Musk, Martin Eberhard, Marc Tarpenning, JB Straubel và Ian Wright vào năm 2003.
+SpaceX được thành lập bởi Elon Musk vào năm 2002. SpaceX có trụ sở tại Hawthorne, California.
+
+Google được thành lập bởi Larry Page và Sergey Brin vào năm 1998 tại Stanford University.
+Larry Page và Sergey Brin đã tạo ra thuật toán PageRank. Google có trụ sở chính tại Mountain View, California.
+Google đã mua lại DeepMind vào năm 2014 với giá khoảng 500 triệu đô la. DeepMind được thành lập bởi Demis Hassabis, Shane Legg và Mustafa Suleyman vào năm 2010 tại London.
+Demis Hassabis là CEO của DeepMind. DeepMind đã phát triển AlphaGo và AlphaFold.
+Sundar Pichai là CEO của Google và Alphabet. Sundar Pichai thay thế Larry Page vào năm 2019.
+
+Microsoft được thành lập bởi Bill Gates và Paul Allen vào năm 1975 tại Albuquerque, New Mexico.
+Bill Gates là đồng sáng lập Microsoft và từng là CEO của công ty. Paul Allen rời Microsoft vào năm 1983.
+Microsoft đã mua lại GitHub vào năm 2018 với giá 7,5 tỷ đô la. GitHub được thành lập bởi Tom Preston-Werner, Chris Wanstrath, PJ Hyett và Scott Chacon vào năm 2008.
+Microsoft đã đầu tư hơn 10 tỷ đô la vào OpenAI vào năm 2023. Microsoft tích hợp GPT-4 vào Bing và Copilot.
+Satya Nadella là CEO của Microsoft từ năm 2014.
+
+Apple được thành lập bởi Steve Jobs, Steve Wozniak và Ronald Wayne vào năm 1976 tại garage ở Cupertino, California.
+Steve Jobs là đồng sáng lập Apple và từng là CEO. Steve Wozniak thiết kế Apple I và Apple II.
+Tim Cook trở thành CEO của Apple vào năm 2011 sau khi Steve Jobs từ chức. Apple có trụ sở tại Cupertino, California.
+Apple đã mua lại Beats Electronics vào năm 2014 với giá 3 tỷ đô la. Beats được thành lập bởi Dr. Dre và Jimmy Iovine.
+
+Meta (trước đây là Facebook) được thành lập bởi Mark Zuckerberg, Eduardo Saverin, Andrew McCollum, Dustin Moskovitz và Chris Hughes vào năm 2004 tại Harvard University.
+Mark Zuckerberg là CEO của Meta. Facebook đổi tên thành Meta vào năm 2021.
+Meta đã mua lại Instagram vào năm 2012 với giá khoảng 1 tỷ đô la. Instagram được thành lập bởi Kevin Systrom và Mike Krieger vào năm 2010.
+Meta đã mua lại WhatsApp vào năm 2014 với giá 19 tỷ đô la. WhatsApp được thành lập bởi Brian Acton và Jan Koum vào năm 2009.
+
+Amazon được thành lập bởi Jeff Bezos vào năm 1994 tại Seattle, Washington. Jeff Bezos là CEO của Amazon cho đến năm 2021.
+Andy Jassy trở thành CEO của Amazon vào năm 2021. Amazon sở hữu AWS (Amazon Web Services).
+Amazon đã mua lại Whole Foods vào năm 2017 với giá 13,7 tỷ đô la. Amazon đã mua lại Twitch vào năm 2014 với giá 970 triệu đô la.
+Twitch được thành lập bởi Justin Kan và Emmett Shear vào năm 2011.
+
+NVIDIA được thành lập bởi Jensen Huang, Chris Malachowsky và Curtis Priem vào năm 1993 tại Santa Clara, California.
+Jensen Huang là CEO của NVIDIA. NVIDIA sản xuất GPU và là nhà cung cấp chip quan trọng cho AI.
+NVIDIA đã đạt vốn hóa thị trường hơn 1 nghìn tỷ đô la vào năm 2023 nhờ bùng nổ AI.
+
+IBM được thành lập vào năm 1911. IBM đã phát triển Deep Blue, máy tính đánh bại Garry Kasparov vào năm 1997.
+IBM bán mảng PC cho Lenovo vào năm 2005. Arvind Krishna là CEO của IBM từ năm 2020.
+
+Oracle được thành lập bởi Larry Ellison, Bob Miner và Ed Oates vào năm 1977. Larry Ellison là CTO của Oracle.
+Oracle đã mua lại Sun Microsystems vào năm 2010 với giá 7,4 tỷ đô la. Sun Microsystems tạo ra ngôn ngữ Java.
+
+Twitter (nay là X) được thành lập bởi Jack Dorsey, Noah Glass, Biz Stone và Evan Williams vào năm 2006.
+Elon Musk mua lại Twitter vào năm 2022 với giá 44 tỷ đô la và đổi tên thành X vào năm 2023.
+Jack Dorsey là CEO đầu tiên của Twitter. Linda Yaccarino trở thành CEO của X sau khi Elon Musk mua công ty.
+
+Netflix được thành lập bởi Reed Hastings và Marc Randolph vào năm 1997 tại Scotts Valley, California.
+Reed Hastings là đồng sáng lập Netflix. Netflix chuyển từ cho thuê DVD sang streaming vào năm 2007.
+
+Adobe được thành lập bởi John Warnock và Charles Geschke vào năm 1982. Adobe tạo ra PDF và Photoshop.
+Adobe mua lại Figma vào năm 2022 (thỏa thuận 20 tỷ đô la, sau đó bị hủy). Figma được thành lập bởi Dylan Field vào năm 2012.
+
+Salesforce được thành lập bởi Marc Benioff vào năm 1999 tại San Francisco. Marc Benioff là CEO của Salesforce.
+Salesforce mua lại Slack vào năm 2021 với giá 27,7 tỷ đô la. Slack được thành lập bởi Stewart Butterfield vào năm 2013.

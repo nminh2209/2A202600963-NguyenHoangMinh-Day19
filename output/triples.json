@@ -1,0 +1,902 @@
+[
+  {
+    "subject": "OpenAI",
+    "relation": "FOUNDED_BY",
+    "object": "Sam Altman"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "FOUNDED_BY",
+    "object": "Elon Musk"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "FOUNDED_IN",
+    "object": "2015"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "LOCATED_IN",
+    "object": "San Francisco, California"
+  },
+  {
+    "subject": "Sam Altman",
+    "relation": "CEO_OF",
+    "object": "OpenAI"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "DEVELOPED",
+    "object": "ChatGPT"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "DEVELOPED",
+    "object": "GPT-4"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "LEFT_BOARD_OF",
+    "object": "OpenAI"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "FOUNDED_IN",
+    "object": "2018"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "CEO_OF",
+    "object": "Tesla"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "CEO_OF",
+    "object": "SpaceX"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_BY",
+    "object": "Elon Musk"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_BY",
+    "object": "Martin Eberhard"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_BY",
+    "object": "Marc Tarpenning"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_BY",
+    "object": "JB Straubel"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_BY",
+    "object": "Ian Wright"
+  },
+  {
+    "subject": "Tesla",
+    "relation": "FOUNDED_IN",
+    "object": "2003"
+  },
+  {
+    "subject": "SpaceX",
+    "relation": "FOUNDED_BY",
+    "object": "Elon Musk"
+  },
+  {
+    "subject": "SpaceX",
+    "relation": "FOUNDED_IN",
+    "object": "2002"
+  },
+  {
+    "subject": "SpaceX",
+    "relation": "LOCATED_IN",
+    "object": "Hawthorne, California"
+  },
+  {
+    "subject": "Google",
+    "relation": "FOUNDED_BY",
+    "object": "Larry Page"
+  },
+  {
+    "subject": "Google",
+    "relation": "FOUNDED_BY",
+    "object": "Sergey Brin"
+  },
+  {
+    "subject": "Google",
+    "relation": "FOUNDED_IN",
+    "object": "1998"
+  },
+  {
+    "subject": "Google",
+    "relation": "LOCATED_AT",
+    "object": "Stanford University"
+  },
+  {
+    "subject": "Larry Page",
+    "relation": "CREATED",
+    "object": "PageRank"
+  },
+  {
+    "subject": "Sergey Brin",
+    "relation": "CREATED",
+    "object": "PageRank"
+  },
+  {
+    "subject": "Google",
+    "relation": "HEADQUARTERED_IN",
+    "object": "Mountain View, California"
+  },
+  {
+    "subject": "Google",
+    "relation": "ACQUIRED",
+    "object": "DeepMind"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "FOUNDED_BY",
+    "object": "Demis Hassabis"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "FOUNDED_BY",
+    "object": "Shane Legg"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "FOUNDED_BY",
+    "object": "Mustafa Suleyman"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "FOUNDED_IN",
+    "object": "2010"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "LOCATED_IN",
+    "object": "London"
+  },
+  {
+    "subject": "Google",
+    "relation": "ACQUIRED_FOR",
+    "object": "500 million dollars"
+  },
+  {
+    "subject": "Google",
+    "relation": "ACQUIRED_IN",
+    "object": "2014"
+  },
+  {
+    "subject": "Demis Hassabis",
+    "relation": "CEO_OF",
+    "object": "DeepMind"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "DEVELOPED",
+    "object": "AlphaGo"
+  },
+  {
+    "subject": "DeepMind",
+    "relation": "DEVELOPED",
+    "object": "AlphaFold"
+  },
+  {
+    "subject": "Sundar Pichai",
+    "relation": "CEO_OF",
+    "object": "Google"
+  },
+  {
+    "subject": "Sundar Pichai",
+    "relation": "CEO_OF",
+    "object": "Alphabet"
+  },
+  {
+    "subject": "Sundar Pichai",
+    "relation": "REPLACED",
+    "object": "Larry Page"
+  },
+  {
+    "subject": "Sundar Pichai",
+    "relation": "FOUNDED_IN",
+    "object": "2019"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "FOUNDED_BY",
+    "object": "Bill Gates"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "FOUNDED_BY",
+    "object": "Paul Allen"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "FOUNDED_IN",
+    "object": "1975"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "LOCATED_IN",
+    "object": "Albuquerque, New Mexico"
+  },
+  {
+    "subject": "Bill Gates",
+    "relation": "CO_FOUNDED",
+    "object": "Microsoft"
+  },
+  {
+    "subject": "Bill Gates",
+    "relation": "CEO_OF",
+    "object": "Microsoft"
+  },
+  {
+    "subject": "Paul Allen",
+    "relation": "LEFT",
+    "object": "Microsoft"
+  },
+  {
+    "subject": "Paul Allen",
+    "relation": "LEFT_IN",
+    "object": "1983"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "ACQUIRED",
+    "object": "GitHub"
+  },
+  {
+    "subject": "GitHub",
+    "relation": "FOUNDED_BY",
+    "object": "Tom Preston-Werner"
+  },
+  {
+    "subject": "GitHub",
+    "relation": "FOUNDED_BY",
+    "object": "Chris Wanstrath"
+  },
+  {
+    "subject": "GitHub",
+    "relation": "FOUNDED_BY",
+    "object": "PJ Hyett"
+  },
+  {
+    "subject": "GitHub",
+    "relation": "FOUNDED_BY",
+    "object": "Scott Chacon"
+  },
+  {
+    "subject": "GitHub",
+    "relation": "FOUNDED_IN",
+    "object": "2008"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "ACQUISITION_PRICE",
+    "object": "7.5 billion dollars"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "ACQUIRED_IN",
+    "object": "2018"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "INVESTED_IN",
+    "object": "OpenAI"
+  },
+  {
+    "subject": "OpenAI",
+    "relation": "FOUNDED_IN",
+    "object": "2023"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "INTEGRATED",
+    "object": "GPT-4"
+  },
+  {
+    "subject": "Microsoft",
+    "relation": "INTEGRATED",
+    "object": "Copilot"
+  },
+  {
+    "subject": "Satya Nadella",
+    "relation": "CEO_OF",
+    "object": "Microsoft"
+  },
+  {
+    "subject": "Satya Nadella",
+    "relation": "FOUNDED_IN",
+    "object": "2014"
+  },
+  {
+    "subject": "Apple",
+    "relation": "FOUNDED_BY",
+    "object": "Steve Jobs"
+  },
+  {
+    "subject": "Apple",
+    "relation": "FOUNDED_BY",
+    "object": "Steve Wozniak"
+  },
+  {
+    "subject": "Apple",
+    "relation": "FOUNDED_BY",
+    "object": "Ronald Wayne"
+  },
+  {
+    "subject": "Apple",
+    "relation": "FOUNDED_IN",
+    "object": "1976"
+  },
+  {
+    "subject": "Apple",
+    "relation": "LOCATED_IN",
+    "object": "Cupertino, California"
+  },
+  {
+    "subject": "Steve Jobs",
+    "relation": "CO_FOUNDED",
+    "object": "Apple"
+  },
+  {
+    "subject": "Steve Jobs",
+    "relation": "CEO_OF",
+    "object": "Apple"
+  },
+  {
+    "subject": "Steve Wozniak",
+    "relation": "DESIGNED",
+    "object": "Apple I"
+  },
+  {
+    "subject": "Steve Wozniak",
+    "relation": "DESIGNED",
+    "object": "Apple II"
+  },
+  {
+    "subject": "Tim Cook",
+    "relation": "CEO_OF",
+    "object": "Apple"
+  },
+  {
+    "subject": "Apple",
+    "relation": "FOUNDED_IN",
+    "object": "2011"
+  },
+  {
+    "subject": "Steve Jobs",
+    "relation": "RESIGNED_FROM",
+    "object": "Apple"
+  },
+  {
+    "subject": "Apple",
+    "relation": "ACQUIRED",
+    "object": "Beats Electronics"
+  },
+  {
+    "subject": "Beats Electronics",
+    "relation": "FOUNDED_BY",
+    "object": "Dr. Dre"
+  },
+  {
+    "subject": "Beats Electronics",
+    "relation": "FOUNDED_BY",
+    "object": "Jimmy Iovine"
+  },
+  {
+    "subject": "Beats Electronics",
+    "relation": "FOUNDED_IN",
+    "object": "2014"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_BY",
+    "object": "Mark Zuckerberg"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_BY",
+    "object": "Eduardo Saverin"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_BY",
+    "object": "Andrew McCollum"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_BY",
+    "object": "Dustin Moskovitz"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_BY",
+    "object": "Chris Hughes"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_IN",
+    "object": "2004"
+  },
+  {
+    "subject": "Meta",
+    "relation": "FOUNDED_IN",
+    "object": "Harvard University"
+  },
+  {
+    "subject": "Mark Zuckerberg",
+    "relation": "CEO_OF",
+    "object": "Meta"
+  },
+  {
+    "subject": "Facebook",
+    "relation": "RENAME_TO",
+    "object": "Meta"
+  },
+  {
+    "subject": "Facebook",
+    "relation": "FOUNDED_IN",
+    "object": "2021"
+  },
+  {
+    "subject": "Meta",
+    "relation": "ACQUIRED",
+    "object": "Instagram"
+  },
+  {
+    "subject": "Instagram",
+    "relation": "FOUNDED_BY",
+    "object": "Kevin Systrom"
+  },
+  {
+    "subject": "Instagram",
+    "relation": "FOUNDED_BY",
+    "object": "Mike Krieger"
+  },
+  {
+    "subject": "Instagram",
+    "relation": "FOUNDED_IN",
+    "object": "2010"
+  },
+  {
+    "subject": "Instagram",
+    "relation": "ACQUIRED_IN",
+    "object": "2012"
+  },
+  {
+    "subject": "Instagram",
+    "relation": "ACQUIRED_FOR",
+    "object": "1 billion dollars"
+  },
+  {
+    "subject": "Meta",
+    "relation": "ACQUIRED",
+    "object": "WhatsApp"
+  },
+  {
+    "subject": "WhatsApp",
+    "relation": "FOUNDED_BY",
+    "object": "Brian Acton"
+  },
+  {
+    "subject": "WhatsApp",
+    "relation": "FOUNDED_BY",
+    "object": "Jan Koum"
+  },
+  {
+    "subject": "WhatsApp",
+    "relation": "FOUNDED_IN",
+    "object": "2009"
+  },
+  {
+    "subject": "Meta",
+    "relation": "ACQUIRED",
+    "object": "WhatsApp in 2014 for 19 billion dollars"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "FOUNDED_BY",
+    "object": "Jeff Bezos"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "FOUNDED_IN",
+    "object": "1994"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "LOCATED_IN",
+    "object": "Seattle, Washington"
+  },
+  {
+    "subject": "Jeff Bezos",
+    "relation": "CEO_OF",
+    "object": "Amazon"
+  },
+  {
+    "subject": "Jeff Bezos",
+    "relation": "CEO_OF",
+    "object": "Amazon until 2021"
+  },
+  {
+    "subject": "Andy Jassy",
+    "relation": "CEO_OF",
+    "object": "Amazon"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "FOUNDED_IN",
+    "object": "2021"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "ACQUIRED",
+    "object": "AWS"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "ACQUIRED",
+    "object": "Whole Foods"
+  },
+  {
+    "subject": "Whole Foods",
+    "relation": "ACQUIRED_IN",
+    "object": "2017"
+  },
+  {
+    "subject": "Amazon",
+    "relation": "ACQUIRED",
+    "object": "Twitch"
+  },
+  {
+    "subject": "Twitch",
+    "relation": "ACQUIRED_IN",
+    "object": "2014"
+  },
+  {
+    "subject": "Twitch",
+    "relation": "FOUNDED_BY",
+    "object": "Justin Kan"
+  },
+  {
+    "subject": "Twitch",
+    "relation": "FOUNDED_BY",
+    "object": "Emmett Shear"
+  },
+  {
+    "subject": "Twitch",
+    "relation": "FOUNDED_IN",
+    "object": "2011"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "FOUNDED_BY",
+    "object": "Jensen Huang"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "FOUNDED_BY",
+    "object": "Chris Malachowsky"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "FOUNDED_BY",
+    "object": "Curtis Priem"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "FOUNDED_IN",
+    "object": "1993"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "LOCATED_IN",
+    "object": "Santa Clara, California"
+  },
+  {
+    "subject": "Jensen Huang",
+    "relation": "CEO_OF",
+    "object": "NVIDIA"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "PRODUCES",
+    "object": "GPU"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "SUPPLIER_OF",
+    "object": "AI"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "MARKET_CAP",
+    "object": "1 trillion dollars"
+  },
+  {
+    "subject": "NVIDIA",
+    "relation": "ACHIEVED",
+    "object": "2023"
+  },
+  {
+    "subject": "IBM",
+    "relation": "FOUNDED_IN",
+    "object": "1911"
+  },
+  {
+    "subject": "IBM",
+    "relation": "DEVELOPED",
+    "object": "Deep Blue"
+  },
+  {
+    "subject": "Deep Blue",
+    "relation": "DEFEATED",
+    "object": "Garry Kasparov"
+  },
+  {
+    "subject": "Deep Blue",
+    "relation": "DEFEATED_IN",
+    "object": "1997"
+  },
+  {
+    "subject": "IBM",
+    "relation": "ACQUIRED",
+    "object": "Lenovo"
+  },
+  {
+    "subject": "IBM",
+    "relation": "FOUNDED_IN",
+    "object": "2005"
+  },
+  {
+    "subject": "Arvind Krishna",
+    "relation": "CEO_OF",
+    "object": "IBM"
+  },
+  {
+    "subject": "IBM",
+    "relation": "FOUNDED_IN",
+    "object": "2020"
+  },
+  {
+    "subject": "Oracle",
+    "relation": "FOUNDED_BY",
+    "object": "Larry Ellison"
+  },
+  {
+    "subject": "Oracle",
+    "relation": "FOUNDED_BY",
+    "object": "Bob Miner"
+  },
+  {
+    "subject": "Oracle",
+    "relation": "FOUNDED_BY",
+    "object": "Ed Oates"
+  },
+  {
+    "subject": "Oracle",
+    "relation": "FOUNDED_IN",
+    "object": "1977"
+  },
+  {
+    "subject": "Larry Ellison",
+    "relation": "CEO_OF",
+    "object": "Oracle"
+  },
+  {
+    "subject": "Oracle",
+    "relation": "ACQUIRED",
+    "object": "Sun Microsystems"
+  },
+  {
+    "subject": "Sun Microsystems",
+    "relation": "FOUNDED_IN",
+    "object": "2010"
+  },
+  {
+    "subject": "Sun Microsystems",
+    "relation": "CREATED",
+    "object": "Java"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "FOUNDED_BY",
+    "object": "Jack Dorsey"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "FOUNDED_BY",
+    "object": "Noah Glass"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "FOUNDED_BY",
+    "object": "Biz Stone"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "FOUNDED_BY",
+    "object": "Evan Williams"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "FOUNDED_IN",
+    "object": "2006"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "ACQUIRED",
+    "object": "Twitter"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "ACQUIRED_IN",
+    "object": "2022"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "RENAME",
+    "object": "X"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "RENAME_TO",
+    "object": "X"
+  },
+  {
+    "subject": "Twitter",
+    "relation": "RENAME_IN",
+    "object": "2023"
+  },
+  {
+    "subject": "Jack Dorsey",
+    "relation": "CEO_OF",
+    "object": "Twitter"
+  },
+  {
+    "subject": "Linda Yaccarino",
+    "relation": "CEO_OF",
+    "object": "X"
+  },
+  {
+    "subject": "Elon Musk",
+    "relation": "ACQUIRED",
+    "object": "X"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "FOUNDED_BY",
+    "object": "Reed Hastings"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "FOUNDED_BY",
+    "object": "Marc Randolph"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "FOUNDED_IN",
+    "object": "1997"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "LOCATED_IN",
+    "object": "Scotts Valley, California"
+  },
+  {
+    "subject": "Reed Hastings",
+    "relation": "CO_FOUNDED",
+    "object": "Netflix"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "TRANSITIONED_TO",
+    "object": "streaming"
+  },
+  {
+    "subject": "Netflix",
+    "relation": "FOUNDED_IN",
+    "object": "2007"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "FOUNDED_BY",
+    "object": "John Warnock"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "FOUNDED_BY",
+    "object": "Charles Geschke"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "FOUNDED_IN",
+    "object": "1982"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "CREATED",
+    "object": "PDF"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "CREATED",
+    "object": "Photoshop"
+  },
+  {
+    "subject": "Adobe",
+    "relation": "ACQUIRED",
+    "object": "Figma"
+  },
+  {
+    "subject": "Figma",
+    "relation": "FOUNDED_BY",
+    "object": "Dylan Field"
+  },
+  {
+    "subject": "Figma",
+    "relation": "FOUNDED_IN",
+    "object": "2012"
+  },
+  {
+    "subject": "Figma",
+    "relation": "ACQUIRED_IN",
+    "object": "2022"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "FOUNDED_BY",
+    "object": "Marc Benioff"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "FOUNDED_IN",
+    "object": "1999"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "LOCATED_IN",
+    "object": "San Francisco"
+  },
+  {
+    "subject": "Marc Benioff",
+    "relation": "CEO_OF",
+    "object": "Salesforce"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "ACQUIRED",
+    "object": "Slack"
+  },
+  {
+    "subject": "Slack",
+    "relation": "FOUNDED_BY",
+    "object": "Stewart Butterfield"
+  },
+  {
+    "subject": "Slack",
+    "relation": "FOUNDED_IN",
+    "object": "2013"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "ACQUISITION_PRICE",
+    "object": "27.7 billion dollars"
+  },
+  {
+    "subject": "Salesforce",
+    "relation": "ACQUISITION_YEAR",
+    "object": "2021"
+  }
+]

@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+output/chroma_db/
+.ipynb_checkpoints/
+noderag_project/

@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1,
+    "question": "Ai là người đồng sáng lập OpenAI cùng Sam Altman?",
+    "ground_truth": "Elon Musk",
+    "type": "multi_hop",
+    "notes": "Cần liên kết OpenAI -> FOUNDED_BY"
+  },
+  {
+    "id": 2,
+    "question": "Năm nào công ty tạo ra ChatGPT được thành lập?",
+    "ground_truth": "2015",
+    "type": "multi_hop",
+    "notes": "ChatGPT -> OpenAI -> FOUNDED_IN"
+  },
+  {
+    "id": 3,
+    "question": "Ai là CEO của công ty đã mua DeepMind?",
+    "ground_truth": "Sundar Pichai",
+    "type": "multi_hop",
+    "notes": "DeepMind -> acquired by Google -> CEO Sundar Pichai"
+  },
+  {
+    "id": 4,
+    "question": "DeepMind được thành lập ở đâu và bởi ai?",
+    "ground_truth": "London, bởi Demis Hassabis, Shane Legg và Mustafa Suleyman (2010)",
+    "type": "single_hop",
+    "notes": "Thông tin trực tiếp về DeepMind"
+  },
+  {
+    "id": 5,
+    "question": "Công ty nào đã đầu tư hơn 10 tỷ USD vào OpenAI?",
+    "ground_truth": "Microsoft",
+    "type": "single_hop",
+    "notes": "Quan hệ INVESTED_IN"
+  },
+  {
+    "id": 6,
+    "question": "Ai là CEO của công ty sở hữu GitHub?",
+    "ground_truth": "Satya Nadella",
+    "type": "multi_hop",
+    "notes": "GitHub -> Microsoft -> CEO"
+  },
+  {
+    "id": 7,
+    "question": "Năm nào Instagram được thành lập và bởi ai đã mua lại?",
+    "ground_truth": "2010, được Meta (Facebook) mua năm 2012",
+    "type": "multi_hop",
+    "notes": "Instagram founder + Meta acquisition"
+  },
+  {
+    "id": 8,
+    "question": "Elon Musk đã sáng lập những công ty công nghệ nào?",
+    "ground_truth": "OpenAI, Tesla, SpaceX (và mua Twitter/X)",
+    "type": "multi_hop",
+    "notes": "Nhiều quan hệ FOUNDED_BY từ Elon Musk"
+  },
+  {
+    "id": 9,
+    "question": "Ai thay thế Steve Jobs làm CEO của Apple?",
+    "ground_truth": "Tim Cook (2011)",
+    "type": "multi_hop",
+    "notes": "Apple -> CEO succession"
+  },
+  {
+    "id": 10,
+    "question": "Công ty nào tạo ra ngôn ngữ Java và bị Oracle mua lại?",
+    "ground_truth": "Sun Microsystems (2010)",
+    "type": "multi_hop",
+    "notes": "Java -> Sun -> Oracle acquisition"
+  },
+  {
+    "id": 11,
+    "question": "Jeff Bezos rời vị trí CEO Amazon năm nào và ai kế nhiệm?",
+    "ground_truth": "2021, Andy Jassy",
+    "type": "multi_hop",
+    "notes": "Amazon leadership transition"
+  },
+  {
+    "id": 12,
+    "question": "WhatsApp được mua với giá bao nhiêu và bởi công ty nào?",
+    "ground_truth": "19 tỷ USD bởi Meta (Facebook) năm 2014",
+    "type": "multi_hop",
+    "notes": "WhatsApp acquisition chain"
+  },
+  {
+    "id": 13,
+    "question": "Ai là CEO của NVIDIA và công ty này thành lập năm nào?",
+    "ground_truth": "Jensen Huang, thành lập 1993",
+    "type": "single_hop",
+    "notes": "NVIDIA facts"
+  },
+  {
+    "id": 14,
+    "question": "Larry Page và Sergey Brin đã tạo ra thuật toán gì?",
+    "ground_truth": "PageRank",
+    "type": "single_hop",
+    "notes": "Google founders contribution"
+  },
+  {
+    "id": 15,
+    "question": "Công ty mẹ của DeepMind có trụ sở chính ở đâu?",
+    "ground_truth": "Mountain View, California (Google/Alphabet)",
+    "type": "multi_hop",
+    "notes": "DeepMind -> Google -> HQ location"
+  },
+  {
+    "id": 16,
+    "question": "Slack được thành lập bởi ai và bị công ty nào mua lại?",
+    "ground_truth": "Stewart Butterfield (2013), mua bởi Salesforce (2021)",
+    "type": "multi_hop",
+    "notes": "Slack -> Salesforce"
+  },
+  {
+    "id": 17,
+    "question": "Elon Musk mua Twitter với giá bao nhiêu và đổi tên thành gì?",
+    "ground_truth": "44 tỷ USD, đổi tên thành X (2023)",
+    "type": "multi_hop",
+    "notes": "Twitter acquisition by Musk"
+  },
+  {
+    "id": 18,
+    "question": "Ai là đồng sáng lập Microsoft cùng Bill Gates?",
+    "ground_truth": "Paul Allen",
+    "type": "single_hop",
+    "notes": "Microsoft founders"
+  },
+  {
+    "id": 19,
+    "question": "Công ty nào phát triển AlphaGo và thuộc sở hữu của ai?",
+    "ground_truth": "DeepMind phát triển AlphaGo, thuộc Google",
+    "type": "multi_hop",
+    "notes": "AlphaGo -> DeepMind -> Google"
+  },
+  {
+    "id": 20,
+    "question": "Mark Zuckerberg sáng lập Facebook tại đâu và đổi tên công ty thành gì?",
+    "ground_truth": "Harvard University (2004), đổi tên thành Meta (2021)",
+    "type": "multi_hop",
+    "notes": "Meta/Facebook history"
+  }
+]
