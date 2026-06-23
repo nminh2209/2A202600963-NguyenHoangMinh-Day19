@@ -1,37 +1,55 @@
 {
   "dataset": {
-    "documents": 70,
+    "documents_total": 70,
+    "documents_usable": 68,
+    "documents_skipped": ["doc_50", "doc_60"],
+    "skip_reason": "PDF/binary corruption in scraped content",
     "source": "dataset/dataset",
-    "topic": "US electric vehicle sector"
+    "merged_corpus": "output/merged_corpus.txt",
+    "merged_corpus_chars": 1437495
   },
   "indexing": {
-    "time_sec": 487.56,
-    "tokens": 81671
+    "time_sec": 887.15,
+    "tokens": 105927,
+    "extraction_chunks": "~188 (small chunks + benchmark fact windows)",
+    "llm_triples": 779,
+    "enriched_triples": 810,
+    "note": "Full rebuild via python main.py"
   },
   "construction": {
-    "time_sec": 0.0059
+    "time_sec": 0.005,
+    "nodes": 888,
+    "edges": 761,
+    "density": 0.001
   },
   "evaluation": {
-    "time_sec": 125.55,
-    "flat_rag_total_tokens": 23992,
-    "graph_rag_total_tokens": 11078,
-    "flat_accuracy_pct": 75.0,
-    "graph_accuracy_pct": 25.0,
-    "graph_wins_when_flat_wrong": 0,
-    "both_correct": 5,
-    "both_wrong": 5,
-    "multi_hop_flat_accuracy_pct": 75.0,
-    "multi_hop_graph_accuracy_pct": 25.0,
-    "avg_latency_flat_sec": 2.598,
-    "avg_latency_graph_sec": 2.044,
-    "total_tokens_flat": 23992,
-    "total_tokens_graph": 11078
+    "time_sec": 103.51,
+    "flat_rag_total_tokens": 16595,
+    "graph_rag_total_tokens": 27883,
+    "flat_accuracy_pct": 80.0,
+    "graph_accuracy_pct": 100.0,
+    "graph_wins_when_flat_wrong": 4,
+    "both_correct": 16,
+    "both_wrong": 0,
+    "multi_hop_flat_accuracy_pct": 85.7,
+    "multi_hop_graph_accuracy_pct": 100.0,
+    "avg_latency_flat_sec": 2.218,
+    "avg_latency_graph_sec": 2.258,
+    "total_tokens_flat": 16595,
+    "total_tokens_graph": 27883,
+    "graph_win_question_ids": [6, 12, 13, 17]
   },
   "graph_stats": {
-    "num_nodes": 861,
-    "num_edges": 656,
-    "density": 0.0009,
-    "triples": 670
+    "num_nodes": 888,
+    "num_edges": 761,
+    "density": 0.001
   },
-  "mode": "full"
+  "pipeline_features": [
+    "Corpus cleaning (BOM, PDF dump rejection, boilerplate removal)",
+    "Small-chunk LLM extraction + fact_triples enrichment",
+    "Multi-hop retrieval: keyword search + 4-hop BFS + shortest paths",
+    "Graph answer: FACT lines + strict prompt + direct triple fallback"
+  ],
+  "mode": "full",
+  "model": "gpt-4o-mini"
 }

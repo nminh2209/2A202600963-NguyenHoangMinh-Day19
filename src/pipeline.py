@@ -17,9 +17,10 @@ from src.config import (
     TRIPLES_PATH,
     get_openai_api_key,
 )
-from src.corpus import prepare_corpus
+from src.corpus import load_dataset, prepare_corpus
 from src.entity_extraction import extract_triples_from_corpus, load_triples, save_triples
 from src.evaluation import compute_summary, run_evaluation
+from src.fact_triples import enrich_triples
 from src.flat_rag import FlatRAG
 from src.graph_construction import build_networkx_graph, graph_stats
 from src.visualize import visualize_graph
@@ -69,7 +70,9 @@ def run_full_pipeline(
         state.triples = result.triples
         state.indexing_tokens = result.total_tokens
         state.indexing_sec = time.perf_counter() - t0
-        save_triples(state.triples, TRIPLES_PATH)
+
+    state.triples = enrich_triples(state.triples, CORPUS_PATH)
+    save_triples(state.triples, TRIPLES_PATH)
 
     _progress("Building knowledge graph...", 0.35)
     t0 = time.perf_counter()
@@ -91,7 +94,11 @@ def run_full_pipeline(
         eval_sec = time.perf_counter() - t0
         summary = compute_summary(state.eval_df)
         state.cost_report = {
-            "dataset": {"documents": 70, "source": "dataset/dataset"},
+            "dataset": {
+                "documents_total": 70,
+                "documents_usable": len(load_dataset(DATASET_DIR)) if DATASET_DIR.exists() else 68,
+                "source": "dataset/dataset",
+            },
             "indexing": {"time_sec": round(state.indexing_sec, 2), "tokens": state.indexing_tokens},
             "construction": {"time_sec": round(state.construction_sec, 4)},
             "evaluation": {

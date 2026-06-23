@@ -36,7 +36,7 @@ from src.querying import answer_with_graph
 st.set_page_config(page_title="GraphRAG Lab 19", page_icon="🔗", layout="wide")
 
 st.title("🔗 Lab 19: GraphRAG — US Electric Vehicle Dataset")
-st.caption("70 documents | Flat RAG (ChromaDB) vs GraphRAG (NetworkX + BFS)")
+st.caption("68 clean docs | Flat RAG (ChromaDB) vs GraphRAG (NetworkX + multi-hop paths)")
 
 
 def init_session():

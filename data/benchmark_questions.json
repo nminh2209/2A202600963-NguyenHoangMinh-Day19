@@ -1,101 +1,101 @@
 [
   {
     "id": 1,
-    "question": "What was the electric share of new US vehicle sales in 2020?",
-    "ground_truth": "2.4%",
-    "type": "single_hop",
-    "notes": "ICCT 2021 study"
+    "question": "What EV market share did US states WITH ZEV regulations have, compared to states WITHOUT ZEV regulations?",
+    "ground_truth": "5% with ZEV vs 1.3% without",
+    "type": "multi_hop",
+    "notes": "Graph links ZEV states -> 5% AND non-ZEV -> 1.3%; Flat may retrieve only one chunk"
   },
   {
     "id": 2,
-    "question": "Which company leads the US EV market with more than half of all EV sales?",
-    "ground_truth": "Tesla",
-    "type": "single_hop",
-    "notes": "BBC / market share"
+    "question": "Who is the lead author of the BloombergNEF report that projects road transport oil demand will peak in 2027?",
+    "ground_truth": "Colin McKerracher",
+    "type": "multi_hop",
+    "notes": "BNEF -> EVO -> McKerracher + 2027 oil peak"
   },
   {
     "id": 3,
-    "question": "How much oil usage do EVs displace per day globally (2023 BNEF figure)?",
-    "ground_truth": "1.7 million barrels per day",
-    "type": "single_hop",
-    "notes": "BloombergNEF EVO"
+    "question": "Which company leads the US EV market with more than half of sales, and recently reported its lowest quarterly earnings in how many years?",
+    "ground_truth": "Tesla, two years",
+    "type": "multi_hop",
+    "notes": "Tesla market share + earnings chain"
   },
   {
     "id": 4,
-    "question": "What is the federal US tax credit for EV purchases?",
-    "ground_truth": "$7,500",
-    "type": "single_hop",
-    "notes": "BBC affordability article"
+    "question": "What organization published the September 2021 study on electric vehicle market growth across US cities?",
+    "ground_truth": "ICCT",
+    "type": "multi_hop",
+    "notes": "ICCT -> study -> September 2021"
   },
   {
     "id": 5,
-    "question": "What year did General Motors announce a goal to phase out internal combustion engines?",
-    "ground_truth": "2035",
-    "type": "single_hop",
-    "notes": "GM ICE phase-out goal"
+    "question": "Which three automakers were targeted by the UAW strike related to EV transition?",
+    "ground_truth": "GM, Ford, and Stellantis",
+    "type": "multi_hop",
+    "notes": "UAW -> STRIKE_AGAINST -> 3 companies"
   },
   {
     "id": 6,
-    "question": "How many public chargers per million population did the top 10 US metro areas average?",
-    "ground_truth": "935",
-    "type": "single_hop",
-    "notes": "ICCT charging analysis"
+    "question": "Who is the VP of Electric Vehicle Practice at the firm that reported 29.2% of shoppers were very likely to consider an EV?",
+    "ground_truth": "Elizabeth Krear at J.D. Power",
+    "type": "multi_hop",
+    "notes": "J.D. Power -> 29.2% -> Elizabeth Krear"
   },
   {
     "id": 7,
-    "question": "What was the US EV sales growth rate in the first half of 2023?",
-    "ground_truth": "51%",
-    "type": "single_hop",
-    "notes": "Motor Intelligence / BBC"
+    "question": "How many public chargers per million population did the top 10 US metro areas average, and how many workplace chargers?",
+    "ground_truth": "935 public and 430 workplace per million",
+    "type": "multi_hop",
+    "notes": "ICCT two related metrics"
   },
   {
     "id": 8,
-    "question": "How many EV chargers does the Biden administration aim to deploy by 2030?",
-    "ground_truth": "500,000",
-    "type": "single_hop",
-    "notes": "Biden charging network plan"
+    "question": "What is the charging infrastructure market size to 2050 in BNEF's Economic Transition Scenario, and when does road transport oil demand peak?",
+    "ground_truth": "$242 billion and 2027",
+    "type": "multi_hop",
+    "notes": "BNEF two facts from same report"
   },
   {
     "id": 9,
-    "question": "What percentage of US new vehicle shoppers were very likely to consider an EV in October (J.D. Power)?",
-    "ground_truth": "29.2%",
-    "type": "single_hop",
-    "notes": "J.D. Power survey"
+    "question": "How much oil do EVs displace daily globally, and which country dominates both EV sales and battery manufacturing?",
+    "ground_truth": "1.7 million barrels per day; China",
+    "type": "multi_hop",
+    "notes": "BNEF oil displacement + China dominance"
   },
   {
     "id": 10,
-    "question": "Where is manufacturing of battery cells and key components most concentrated?",
-    "ground_truth": "China",
-    "type": "single_hop",
-    "notes": "BloombergNEF battery section"
+    "question": "What year did GM announce phasing out internal combustion engines, and which company delayed billions in EV investment?",
+    "ground_truth": "GM target 2035; Ford delayed EV investment",
+    "type": "multi_hop",
+    "notes": "GM + Ford chain"
   },
   {
     "id": 11,
-    "question": "Tesla recently reported its lowest quarterly earnings in how many years?",
-    "ground_truth": "two years",
+    "question": "What was the electric share of new US vehicle sales in 2020?",
+    "ground_truth": "2.4%",
     "type": "single_hop",
-    "notes": "BBC Tesla earnings"
+    "notes": "ICCT"
   },
   {
     "id": 12,
-    "question": "What combined new electric vehicle share did US states with ZEV regulations have?",
-    "ground_truth": "5%",
-    "type": "multi_hop",
-    "notes": "ZEV states vs non-ZEV"
+    "question": "How many EV chargers does the Biden administration aim to deploy by 2030?",
+    "ground_truth": "500,000",
+    "type": "single_hop",
+    "notes": "Biden plan"
   },
   {
     "id": 13,
-    "question": "In what year does BNEF project road transport oil demand to peak?",
-    "ground_truth": "2027",
+    "question": "What was the US EV sales growth rate in the first half of 2023?",
+    "ground_truth": "51%",
     "type": "single_hop",
-    "notes": "BNEF EVO outlook"
+    "notes": "Motor Intelligence"
   },
   {
     "id": 14,
-    "question": "Who is the lead author of the BloombergNEF Electric Vehicle Outlook?",
-    "ground_truth": "Colin McKerracher",
+    "question": "What is the federal US tax credit for new EV purchases?",
+    "ground_truth": "$7,500",
     "type": "single_hop",
-    "notes": "BNEF report credits"
+    "notes": "BBC"
   },
   {
     "id": 15,
@@ -106,37 +106,37 @@
   },
   {
     "id": 16,
-    "question": "Which three US automakers were involved in the UAW strike over EV transition?",
-    "ground_truth": "GM, Ford, and Stellantis",
-    "type": "multi_hop",
-    "notes": "UAW strike 2023"
+    "question": "What was approximate annual US EV sales from 2018 to 2020?",
+    "ground_truth": "more than 315,000",
+    "type": "single_hop",
+    "notes": "ICCT"
   },
   {
     "id": 17,
-    "question": "By 2026 what percentage of the US new vehicle market scope will have a viable EV substitute (J.D. Power projection)?",
+    "question": "By 2026 what percentage of the US new vehicle market will have a viable EV substitute per J.D. Power?",
     "ground_truth": "75%",
     "type": "multi_hop",
-    "notes": "Krear projection"
+    "notes": "J.D. Power projection"
   },
   {
     "id": 18,
-    "question": "What was the approximate annual US electric vehicle sales from 2018 to 2020?",
-    "ground_truth": "more than 315,000",
-    "type": "single_hop",
-    "notes": "ICCT market growth"
+    "question": "States with ZEV regulations were responsible for what fraction of 2020 US EV sales?",
+    "ground_truth": "about two-thirds",
+    "type": "multi_hop",
+    "notes": "ZEV states -> sales share"
   },
   {
     "id": 19,
-    "question": "What is the size of the charging infrastructure market opportunity to 2050 in BNEF's Economic Transition Scenario?",
-    "ground_truth": "$242 billion",
-    "type": "single_hop",
-    "notes": "BNEF charging market"
+    "question": "How many electric models did states with ZEV regulations typically have compared to states without?",
+    "ground_truth": "at least 13 more electric models",
+    "type": "multi_hop",
+    "notes": "ZEV states vs non-ZEV model availability"
   },
   {
     "id": 20,
-    "question": "What organization published the study on evaluating electric vehicle market growth across US cities in September 2021?",
-    "ground_truth": "ICCT",
+    "question": "What combined incentive range did top US metro areas offer for EV purchases?",
+    "ground_truth": "$1,500 to more than $5,500",
     "type": "multi_hop",
-    "notes": "ICCT / theicct.org study"
+    "notes": "ICCT metro incentives"
   }
 ]

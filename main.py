@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LAB DAY 19: GraphRAG Pipeline - Tech Company Corpus
+LAB DAY 19: GraphRAG Pipeline - US Electric Vehicle Dataset (70 docs)
 Run: python main.py --demo          # No API key needed
      python main.py                 # Full pipeline with OpenAI
      python main.py --neo4j         # Also push to Neo4j
